@@ -24,27 +24,16 @@ int main(){
  windowmanager.ShapeWindow();
  graphicsmanager.BuildDisplayLists();
 
- while(windowmanager.GAMEON){
+ while(graphicsmanager.RenderFrame(&player)){
   V.vlock.Start();
 
   //calculate logic for 75% of frame time
   while( V.vlock.getDelta() < V.vlock.logicTime ){
-   cout<< "Frame Count: " << V.vlock.frameCount << endl;
-   cout<< "Delta Time: " << V.vlock.deltaTime << endl;
-   cout<< "Logic Time: " << V.vlock.logicTime << endl;
-   windowmanager.Handler();
+
+   windowmanager.Handler(&player);
+
   }
-  cout<<"exit handle loop"<<endl;
-  //render frame for final 25% of frame time
-  graphicsmanager.RenderFrame(&player);
-
-  // V.vlock.getDelta();
-  // if(V.vlock.deltaTime<40.0){
-  //  cout<<"sleeping for "<<((V.vlock.deltaTime)/1000.0)<<" milliseconds"<<endl;
-  //  sleep((40.0 - V.vlock.deltaTime)/1000.0);
-
-  // }
-  cout<<"done loop"<<endl;
+  cout << V.vlock.frameCount << endl;
  }
 
  return 0;

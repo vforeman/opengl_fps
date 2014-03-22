@@ -49,7 +49,7 @@ public:
   glClearColor(1,1,1,1);
  };
 
- void Handler(){
+ void Handler(FPCamera *player){
   if(XPending(V.dpy)){
    XNextEvent(V.dpy,&V.xev);
    ///handle keyboard presses
@@ -65,10 +65,11 @@ public:
      XCloseDisplay(V.dpy);
      exit(0);
     }
-    if(keysym == XK_Up){}
-    if(keysym == XK_Down){}
-    if(keysym == XK_Right){}
-    if(keysym == XK_Left){}
+    if((keysym == XK_Up)&&(keysym == XK_Right)){player->Forward();player->Right();  }
+    if(keysym == XK_Up){player->Forward();}
+    if(keysym == XK_Down){player->Backward();}
+    if(keysym == XK_Right){player->Right();}
+    if(keysym == XK_Left){player->Left();}
     if((keysym == XK_q)||(keysym == XK_Q)){}
    }
   }

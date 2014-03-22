@@ -5,12 +5,55 @@
 #include <GL/glx.h>
 #include <sys/time.h>
 
+#define green {0,1,0,1}
+#define cyan {0,1,1,1}
+#define yellow {1,1,0,1}
+#define red {1,0,0,1}
+#define blue {0,0,1,1}
+#define magenta {1,0,1,1}
+
+//Vertex array for faces of a cube
+GLfloat faces[6][4][3] ={
+
+ { { .9, .9, .9}, { .9,-.9, .9}, { .9,-.9,-.9}, { .9, .9,-.9} },
+ { { .9, .9,-.9}, { .9,-.9,-.9}, {-.9,-.9,-.9}, {-.9, .9,-.9} },
+ { {-.9, .9,-.9}, {-.9,-.9,-.9}, {-.9,-.9, .9}, {-.9, .9, .9} },
+ { {-.9, .9, .9}, {-.9,-.9, .9}, { .9,-.9, .9}, { .9, .9, .9} },
+ { {-.9, .9,-.9}, {-.9, .9, .9}, { .9, .9, .9}, { .9, .9,-.9} },
+ { { .9,-.9, .9}, { .9,-.9,-.9}, {-.9,-.9,-.9}, {-.9,-.9, .9} }
+
+};
+
+//Vertex array for normals of the cube
+GLfloat normals[6][4][3] ={
+
+ { { 1, 0, 0} , { 1, 0, 0} , { 1, 0, 0} , { 1, 0, 0} },
+ { { 0, 0,-1} , { 0, 0,-1} , { 0, 0,-1} , { 0, 0,-1} },
+ { {-1, 0, 0} , {-1, 0, 0} , {-1, 0, 0} , {-1, 0, 0} },
+ { { 0, 0, 1} , { 0, 0, 1} , { 0, 0, 1} , { 0, 0, 1} },
+ { { 0, 1, 0} , { 0, 1, 0} , { 0, 1, 0} , { 0, 1, 0} },
+ { { 0,-1, 0} , { 0,-1, 0} , { 0,-1, 0} , { 0,-1, 0} }
+
+};
+
+
+
+//Vertex array of Colours for the cube
+GLfloat colors[6][4][4] ={
+ {green,green,green,green},
+ {cyan,cyan,cyan,cyan},
+ {yellow,yellow,yellow,yellow},
+ {red,red,red,red},
+ {blue,blue,blue,blue},
+ {magenta,magenta,magenta,magenta},
+};
+
 class Vlock{
 public:
  timeval start,end;
  double FPS;//frames per second
  double mSPF;//milliseconds per frame
- double deltaTime;//frame time
+ long double deltaTime;//frame time
  double logicTime;//max time allotted to event handling
  double renderTime;//max time allotted to rendering
  double logicPercentage;//percentage of mSPF for logic
@@ -30,13 +73,16 @@ public:
  void Start(){
   deltaTime = 0.0;
   ++frameCount;
-  gettimeofday( &start , NULL );
+  while(gettimeofday( &start , NULL )!=0){}
  };
 
  //stop timer
  void MarkTime(){
-  gettimeofday( &end , NULL );
+  while(gettimeofday( &end , NULL )!=0){}
   deltaTime = ( end.tv_usec - start.tv_usec ) / 1000.0;
+  if(deltaTime<0){
+   deltaTime=logicTime+30;
+  }
  };
 
  //calculate time partitions
