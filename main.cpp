@@ -20,6 +20,15 @@ int main(){
  GraphicsManager graphicsmanager;
  FPCamera player;
 
+
+ //list of enemy positions;
+ Vector3f enemyPosition[4]={ Vector3f() , Vector3f() , Vector3f() , Vector3f()};
+
+
+
+
+
+
  windowmanager.MakeWindow();
  windowmanager.ShapeWindow();
  graphicsmanager.BuildDisplayLists();

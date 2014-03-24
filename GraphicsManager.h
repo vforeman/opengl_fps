@@ -19,18 +19,26 @@ public:
 
   glMatrixMode( GL_MODELVIEW );
 
-  /**
-  static background rendering
-  **/
+/**
+*static background rendering
+**/
+  //load the identity matrix
+  //[1,0,0,0]
+  //[0,1,0,0]
+  //[0,0,1,0]
+  //[0,0,0,1]
   glLoadIdentity();
+
   //DrawDisplayLists();
+  //draw 250 blocks translating
   DrawGround( 50 , -4 ,  50 ); //50 x 50 ground -4 elevation
 
-  /**
-  dynamic foreground rendering
-  **/
-  /*Block(1,1,-5).*/DrawBlock();
-  DrawBlock( Vector3f( -2 , 2 , -3 ) );
+/**
+*dynamic foreground rendering
+**/
+
+/*Block(1,1,-5).*/DrawBlock();//draw block at origin
+  DrawBlock( Vector3f( -2 , 2 , -3 ) ); //draw a block at pos (-2,2,-3)
   glXSwapBuffers( V.dpy , V.win );
   glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 

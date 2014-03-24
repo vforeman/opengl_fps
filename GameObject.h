@@ -4,6 +4,9 @@
 
 
 
+
+
+
 /*
 concrete classes:
 FPCamera, Bullet, Enemy, Background, Tool
@@ -40,23 +43,7 @@ void DrawBlock(Vector3f pos){
    glTranslatef(pos.x,pos.y,pos.z);
    /*if( ( pos.x / 2 ) == 1 ){ glRotatef( 90.0 , 1.0 , 0.0 , 0.0 ); }*/
       //Enable vertex arrays we want to draw with
-   glEnableClientState(GL_VERTEX_ARRAY);
-   glEnableClientState(GL_NORMAL_ARRAY);
-   glEnableClientState(GL_COLOR_ARRAY);
-
-   //Connect the arrays themselves
-   glVertexPointer(3, GL_FLOAT, 0, faces);
-   glNormalPointer(GL_FLOAT, 0, normals);
-   glColorPointer(4, GL_FLOAT, 0, colors);
-
-   //Draw command - draw everything
-   glDrawArrays(GL_QUADS, 0, 6*4);
-
-
-   //Disable vertex arrays that are no longer in use
-   glDisableClientState(GL_VERTEX_ARRAY);
-   glDisableClientState(GL_NORMAL_ARRAY);
-   glDisableClientState(GL_COLOR_ARRAY);
+   DrawBlock();
 
  glPopMatrix();
 

@@ -5,6 +5,7 @@
 #include <GL/glx.h>
 #include <sys/time.h>
 
+
 #define green {0,1,0,1}
 #define cyan {0,1,1,1}
 #define yellow {1,1,0,1}

@@ -65,7 +65,7 @@ public:
      XCloseDisplay(V.dpy);
      exit(0);
     }
-    if((keysym == XK_Up)&&(keysym == XK_Right)){player->Forward();player->Right();  }
+    if((keysym == XK_Up)&&(keysym == XK_Right)){player->Forward(); player->Right();}
     if(keysym == XK_Up){player->Forward();}
     if(keysym == XK_Down){player->Backward();}
     if(keysym == XK_Right){player->Right();}
